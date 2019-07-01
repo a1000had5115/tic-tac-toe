@@ -16,22 +16,21 @@ class App extends Component {
     this.setState({
       counter: this.state.counter + 1
     })
-    console.log(this.state.counter)
+  }
+
+  allFields(){
+    let fields = [];
+    for(let i = 0; i < 9; i++) {
+      fields[i] = <div key={i} className="fieldContainer" onClick={this.counterChange}><Field counter={this.state.counter}/></div>;
+    }
+    return fields;
   }
 
 
   render() {
-    return (
-      <div className="container" onClick={this.counterChange}>
-        <Field number="1" counter={this.state.counter}/>
-        <Field number="2" counter={this.state.counter}/>
-        <Field number="3" counter={this.state.counter}/>
-        <Field number="4" counter={this.state.counter}/>
-        <Field number="5" counter={this.state.counter}/>
-        <Field number="6" counter={this.state.counter}/>
-        <Field number="7" counter={this.state.counter}/>
-        <Field number="8" counter={this.state.counter}/>
-        <Field number="9" counter={this.state.counter}/>
+    return (//onClick={this.counterChange}
+      <div className="container"> 
+        {this.allFields()}
       </div>
     );
   }
