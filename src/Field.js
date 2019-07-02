@@ -7,10 +7,14 @@ class Field extends Component {
         super(props);
         this.state = {symbol: "", className: ""};
 
-        this.abc = this.abc.bind(this);
+        this.handleClickField = this.handleClickField.bind(this);
+    }
+
+    componentWillReceiveProps(){
+        if(this.props.reset) this.setState({symbol: ""}) // NA TYM STANĘŁO SKOŃCZ TO PÓŹNIEJ
     }
     
-   abc() {
+   handleClickField() {
         if(!this.props.end){
             if(this.props.counter % 2 === 0 && this.state.symbol === "") this.setState({symbol: "X"})
             else if(this.props.counter % 2 === 1 && this.state.symbol === "") this.setState({symbol: "O"})
@@ -21,10 +25,12 @@ class Field extends Component {
         }
     }
 
+    
+
 
     render(){
         return(
-            <div className="field" onClick={this.abc}>
+            <div className="field" onClick={this.handleClickField}>
                 <p className={this.state.className}>{this.state.symbol}</p>
             </div>
         );
