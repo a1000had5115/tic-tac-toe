@@ -60,6 +60,7 @@ body {
   width: 400px;
   display: flex;
   justify-content: space-around;
+  margin-top: 100px;
   margin-bottom: 10px;
   font-size: 25px;
   letter-spacing: 1px;
@@ -68,7 +69,8 @@ body {
 }
 
 .endMsg {
-  text-transform: uppercase;
+  height: 70px;
   margin-top: 50px;
+  text-transform: uppercase;
   color: #776e65;
 }
