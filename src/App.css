@@ -11,6 +11,18 @@ body {
   flex-direction: column;
 }
 
+.container > h1 {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #776e65;
+  font-size: 50px;
+  margin: 0;
+}
+
+.createUsers {
+  display: flex;
+}
+
 .board {
   width: 400px;
   height: 400px;
@@ -65,8 +77,8 @@ body {
   letter-spacing: 1px;
   color: #776e65;
   transition: .3s ease-in-out;
-  margin-top: 100px;
   position: relative;
+  margin-top: 50px;
 }
 
 .informationContainer > p {
@@ -153,6 +165,7 @@ body {
 .endActive {
   opacity: 1;
 }
+
 
 
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import InsertUsers from './InsertUsers';
 import Field from './Field';
 import Information from './Information';
 import EndMessage from './EndMessage';
@@ -164,6 +165,8 @@ class App extends Component {
   render() {
     return (
       <div className="container">
+        <h1>Kółko i krzyżyk</h1>
+        <InsertUsers />
         <Information userOne="Torvey" userTwo="Gunwo" pointOne={this.state.userOnePoints} pointTwo={this.state.userTwoPoints} classInfoLeft={this.state.classInfoLeft} classInfoRight={this.state.classInfoRight}/>
         <div className="board"> 
           {this.allFields()}
