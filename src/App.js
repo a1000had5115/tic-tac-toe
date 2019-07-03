@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Field from './Field';
-import Users from './Users';
+import Information from './Information';
 import EndMessage from './EndMessage';
 
 class App extends Component {
@@ -16,8 +16,11 @@ class App extends Component {
       end: false, 
       endClass: "endMsg", 
       reset: false,
+      winner: "",
       userOnePoints: 0,
-      userTwoPoints: 0
+      userTwoPoints: 0,
+      classInfoRight: "",
+      classInfoLeft: ""
     }
 
     this.counterChange = this.counterChange.bind(this);
@@ -59,8 +62,37 @@ class App extends Component {
              this.setState({
                end: true,
                endClass: "endMsg endActive",
-               endMsg: "Wygrana"
+               endMsg: "Wygrał ", 
               })
+              if(this.state.counter % 2 === 0){
+                if((this.state.userOnePoints + this.state.userTwoPoints) % 2 === 0){
+                  this.setState({
+                    winner: "Torvey",
+                    userOnePoints: this.state.userOnePoints + 1
+                  })
+                }
+                else(
+                  this.setState({
+                    winner: "Gunwo",
+                    userTwoPoints: this.state.userTwoPoints + 1
+                  })
+                )
+              }
+
+              else{
+                if((this.state.userOnePoints + this.state.userTwoPoints) % 2 === 0){
+                  this.setState({
+                    winner: "Gunwo",
+                    userTwoPoints: this.state.userTwoPoints + 1
+                  })
+                }
+                else(
+                  this.setState({
+                    winner: "Torvey",
+                    userOnePoints: this.state.userOnePoints + 1
+                  })
+                )
+              }
            }
       },10)
     }
@@ -74,7 +106,8 @@ class App extends Component {
         this.setState({
           endMsg: "Koniec gry, remis!",
           end: true,
-          endClass: "endMsg endActive"
+          endClass: "endMsg endActive",
+          winner: ""
         });
       }
     }
@@ -86,7 +119,7 @@ class App extends Component {
     })
   }
 
-  resetStates(){
+  resetStates(cont){
     this.setState({
       end: false,
       endClass: "endMsg",
@@ -94,8 +127,29 @@ class App extends Component {
         return 0;
       }),
       counter: 1,
-      reset: true
+      reset: true,
     });
+    if(!cont){
+      this.setState({
+        userOnePoints: 0,
+        userTwoPoints: 0,
+        winner: ""
+      })
+    }
+    if(cont){
+      if((this.state.userOnePoints + this.state.userTwoPoints) % 2 === 1){
+        this.setState({
+          classInfoLeft: "sideLeft",
+          classInfoRight: "sideRight"
+        })
+      }
+      else{
+        this.setState({
+          classInfoLeft: "",
+          classInfoRight: ""
+        })
+      }
+    }
   }
 
   allFields(){
@@ -110,11 +164,11 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <Users userOne="Torvey" userTwo="Gunwo"/>
+        <Information userOne="Torvey" userTwo="Gunwo" pointOne={this.state.userOnePoints} pointTwo={this.state.userTwoPoints} classInfoLeft={this.state.classInfoLeft} classInfoRight={this.state.classInfoRight}/>
         <div className="board"> 
           {this.allFields()}
         </div>
-        <EndMessage endMsg={this.state.endMsg} endClass={this.state.endClass} resetStates={this.resetStates}/>
+        <EndMessage endMsg={this.state.endMsg} winner={this.state.winner} endClass={this.state.endClass} resetStates={this.resetStates}/>
       </div>
 
     );

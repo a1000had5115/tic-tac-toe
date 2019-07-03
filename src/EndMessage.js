@@ -4,10 +4,10 @@ const EndMessage = (props) => {
     
     return(
         <div className={props.endClass}>
-            <h2>{props.endMsg}</h2>
+            <h2>{props.endMsg}{props.winner}</h2>
             <div className="btnContainer">
-                <button onClick={props.resetStates}>Nowa gra</button>
-                <button onClick={props.resetStates}>Kontynuuj</button>
+                <button onClick={() => {props.resetStates(false)}}>Nowa gra</button>
+                <button onClick={() => {props.resetStates(true)}}>Kontynuuj</button>
             </div>
         </div>
     )
