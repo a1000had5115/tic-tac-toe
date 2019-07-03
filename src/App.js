@@ -9,10 +9,20 @@ class App extends Component {
 
   constructor(props){
     super(props);
-    this.state = {counter: 1, endMsg: "", elements: [0,0,0,0,0,0,0,0,0], end: false, endClass: "endMsg", reset: false}
+    this.state = {
+      counter: 1, 
+      endMsg: "", 
+      elements: [0,0,0,0,0,0,0,0,0], 
+      end: false, 
+      endClass: "endMsg", 
+      reset: false,
+      userOnePoints: 0,
+      userTwoPoints: 0
+    }
 
     this.counterChange = this.counterChange.bind(this);
     this.resetStates = this.resetStates.bind(this);
+    this.startedNewGame = this.startedNewGame.bind(this);
   }
 
   counterChange(e){
@@ -47,9 +57,9 @@ class App extends Component {
            (this.state.elements[6] === this.state.elements[7] && this.state.elements[7] === this.state.elements[8] && this.state.elements[7] !== 0) ||
            (this.state.elements[0] === this.state.elements[4] && this.state.elements[4] === this.state.elements[8] && this.state.elements[4] !== 0)){
              this.setState({
-               endMsg: "Wygrana",
                end: true,
-               endClass: "endMsg endActive"
+               endClass: "endMsg endActive",
+               endMsg: "Wygrana"
               })
            }
       },10)
@@ -70,6 +80,12 @@ class App extends Component {
     }
   }
 
+  startedNewGame(){
+    this.setState({
+      reset: false
+    })
+  }
+
   resetStates(){
     this.setState({
       end: false,
@@ -77,16 +93,15 @@ class App extends Component {
       elements: this.state.elements.map(item => {
         return 0;
       }),
-      endMsg: "",
       counter: 1,
       reset: true
-    })
+    });
   }
 
   allFields(){
     let fields = [];
     for(let i = 0; i < 9; i++) {
-      fields[i] = <div key={i} className='fieldContainer' onClick={this.counterChange} data-key={i}><Field counter={this.state.counter} end={this.state.end} reset={this.state.reset}/></div>;
+      fields[i] = <div key={i} className='fieldContainer' onClick={this.counterChange} data-key={i}><Field counter={this.state.counter} end={this.state.end} reset={this.state.reset} startedNewGame={this.startedNewGame}/></div>;
     }
     return fields;
   }

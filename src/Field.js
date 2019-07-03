@@ -10,11 +10,19 @@ class Field extends Component {
         this.handleClickField = this.handleClickField.bind(this);
     }
 
-    componentWillReceiveProps(){
-        if(this.props.reset) this.setState({symbol: ""}) // NA TYM STANĘŁO SKOŃCZ TO PÓŹNIEJ
+    componentWillReceiveProps(newProps){
+        let oldProps = this.props;
+        if(oldProps.reset !== newProps.reset) {
+            this.setState({ 
+                symbol: "",
+                className: ""
+            });
+            this.props.startedNewGame();
+        }
+        
     }
     
-   handleClickField() {
+    handleClickField() {
         if(!this.props.end){
             if(this.props.counter % 2 === 0 && this.state.symbol === "") this.setState({symbol: "X"})
             else if(this.props.counter % 2 === 1 && this.state.symbol === "") this.setState({symbol: "O"})

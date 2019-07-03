@@ -7,7 +7,7 @@ const EndMessage = (props) => {
             <h2>{props.endMsg}</h2>
             <div className="btnContainer">
                 <button onClick={props.resetStates}>Nowa gra</button>
-                <button>Kontynuuj</button>
+                <button onClick={props.resetStates}>Kontynuuj</button>
             </div>
         </div>
     )
