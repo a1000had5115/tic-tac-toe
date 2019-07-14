@@ -21,13 +21,29 @@ class App extends Component {
       userOnePoints: 0,
       userTwoPoints: 0,
       classInfoRight: "",
-      classInfoLeft: ""
+      classInfoLeft: "",
+      boardClass: "hide",
+      userInputClass: "",
+      userOne: "",
+      userTwo: ""
     }
 
+    this.newUsers = this.newUsers.bind(this);
     this.counterChange = this.counterChange.bind(this);
     this.resetStates = this.resetStates.bind(this);
     this.startedNewGame = this.startedNewGame.bind(this);
   }
+
+  newUsers(user1, user2){
+    this.setState({
+      userInputClass: "hide",
+      boardClass: "showBoard",
+      userOne: user1,
+      userTwo: user2
+    })
+
+  }
+  
 
   counterChange(e){
 
@@ -68,13 +84,13 @@ class App extends Component {
               if(this.state.counter % 2 === 0){
                 if((this.state.userOnePoints + this.state.userTwoPoints) % 2 === 0){
                   this.setState({
-                    winner: "Torvey",
+                    winner: this.state.userOne,
                     userOnePoints: this.state.userOnePoints + 1
                   })
                 }
                 else(
                   this.setState({
-                    winner: "Gunwo",
+                    winner: this.state.userTwo,
                     userTwoPoints: this.state.userTwoPoints + 1
                   })
                 )
@@ -83,13 +99,13 @@ class App extends Component {
               else{
                 if((this.state.userOnePoints + this.state.userTwoPoints) % 2 === 0){
                   this.setState({
-                    winner: "Gunwo",
+                    winner: this.state.userTwo,
                     userTwoPoints: this.state.userTwoPoints + 1
                   })
                 }
                 else(
                   this.setState({
-                    winner: "Torvey",
+                    winner: this.state.userOne,
                     userOnePoints: this.state.userOnePoints + 1
                   })
                 )
@@ -166,12 +182,14 @@ class App extends Component {
     return (
       <div className="container">
         <h1>Kółko i krzyżyk</h1>
-        <InsertUsers />
-        <Information userOne="Torvey" userTwo="Gunwo" pointOne={this.state.userOnePoints} pointTwo={this.state.userTwoPoints} classInfoLeft={this.state.classInfoLeft} classInfoRight={this.state.classInfoRight}/>
-        <div className="board"> 
-          {this.allFields()}
+        <InsertUsers insertUsers={this.newUsers} usersClass={this.state.userInputClass}/>
+        <div className={`${this.state.boardClass} playground`}> 
+          <Information userOne={this.state.userOne} userTwo={this.state.userTwo} pointOne={this.state.userOnePoints} pointTwo={this.state.userTwoPoints} classInfoLeft={this.state.classInfoLeft} classInfoRight={this.state.classInfoRight}/>
+          <div className="board"> 
+            {this.allFields()}
+          </div>
+          <EndMessage endMsg={this.state.endMsg} winner={this.state.winner} endClass={this.state.endClass} resetStates={this.resetStates}/>
         </div>
-        <EndMessage endMsg={this.state.endMsg} winner={this.state.winner} endClass={this.state.endClass} resetStates={this.resetStates}/>
       </div>
 
     );

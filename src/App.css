@@ -72,7 +72,7 @@ body {
   width: 350px;
   display: flex;
   justify-content: center;
-  margin-bottom: 10px;
+  margin: 0 auto 10px auto;
   font-size: 25px;
   letter-spacing: 1px;
   color: #776e65;
@@ -166,6 +166,71 @@ body {
   opacity: 1;
 }
 
+.createUsers {
+  display: flex;
+  flex-direction: column;
+}
+
+.createUsers h3 {
+  color: #776e65;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0;
+  transform: scale(.7);
+  transition: .2s ease-in-out;
+}
+
+.createUsers .showMsg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 0;
+  color: #776e65;
+  font-weight: 700;
+}
+
+.inputGroup label {
+  margin-bottom: 10px;
+}
+
+.inputGroup input[type=text]{
+  background: #ececec;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.inputGroup input[type=submit]{
+  margin: 30px auto 0 auto; 
+  background: none;
+  border: 2px solid #bbada0;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: #776e65;
+  font-weight: 700;
+  transition: .2s ease-in-out;
+  letter-spacing: 1px; 
+  text-transform: uppercase;
+}
+
+.inputGroup input[type=submit]:hover {
+  background: #bbada0;
+  border-color: transparent;
+  color: #faf8ef;
+}
+
+.showBoard {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
 
 
 
